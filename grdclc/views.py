@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import Http404
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -25,9 +24,9 @@ def login_page(request):
 
         if user is not None:
             login(request, user)
+            messages.success(request, 'Log In Successful')
             return redirect('home')
         else:
-            # CHANGE IN FUTURE
             messages.error(request, 'Wrong username or password')
     context = {'form': form}
     return render(request, 'login.html', context)
@@ -39,14 +38,24 @@ def signup_page(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
+            messages.success(request, 'Sign up successful')
             return redirect('login')
 
-        # else:
-        #     raise Http404('user wrong')
+        else:
+            for error in form.errors:
+                print(error)
+                if error == 'username':
+                    message = 'Username Taken'
+                    messages.error(request, message)
+                if error == 'password2':
+                    message = 'Passwords do not match or the password is not complex enough'
+                    messages.error(request, message)
+
     context = {'form': form}
     return render(request, 'signup.html', context)
 
 
 def logout_user(request):
     logout(request)
+    messages.success(request, 'Log out successful')
     return redirect('home')

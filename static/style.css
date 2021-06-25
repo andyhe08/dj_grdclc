@@ -27,10 +27,17 @@ h2 {
 }
 
 h3 {
-    text-shadow: 1px 1px lightcoral;
     margin: 20px;
     line-height: 1;
     padding: 0;
+}
+
+.error {
+    text-shadow: 1px 1px lightcoral;
+}
+
+.success {
+    text-shadow: 1px 1px lightgreen;
 }
 
 button {

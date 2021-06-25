@@ -146,12 +146,12 @@ document.querySelector("body").addEventListener("input", function (e) {
 
 const dispWarning = () => {
 
-    if (document.querySelector(".warning") != null) {
+    if (document.querySelector(".error") != null) {
         return;
     }
 
     let n = document.createElement("h3");
-    n.classList.add("warning");
+    n.classList.add("error");
     n.innerText = `Warning! Empty Category`;
 
     let foot = document.querySelector("footer h2");
@@ -160,8 +160,8 @@ const dispWarning = () => {
 }
 
 const clearWarning = () => {
-    if (document.querySelector(".warning") != null) {
-        document.querySelector(".warning").remove();
+    if (document.querySelector(".error") != null) {
+        document.querySelector(".error").remove();
     }
 }
 
@@ -197,7 +197,7 @@ const calc = () => {
             dispWarning();
             continue;
         }
-        contributions += weight * (totalYourPoints * 1.0 / totalAllPoints);
+        contributions += weight * (totalYourPoints / totalAllPoints);
     }
 
     return contributions;
