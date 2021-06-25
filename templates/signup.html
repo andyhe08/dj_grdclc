@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>Sign Up</title>
+{% endblock %}
+
+{% block moreCSS %}
+    <link rel="stylesheet" href="{% static 'authStyle.css' %}" type="text/css" media="all">
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <ul class="form">
+            {{ form.as_ul }}
+        </ul>
+        <input type="submit" name="Create User" value="Sign Up">
+    </form>
+
+    {% for message in messages %}
+        <h3>{{ message }}</h3>
+    {% endfor %}
+{% endblock %}

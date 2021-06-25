@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" media="all">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Quicksand:wght@500&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Farro&display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    {% block title %}
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}
+
+    {% block moreCSS %}
+    {% endblock %}
+</head>
+<body>
+<nav>
+    <h1><a id="head" href="{% url 'home' %}">Grade Calculator</a></h1>
+
+    <a class="item" href="{% url 'about' %}">About</a>
+
+    <!--    MAX 3 LINKS-->
+    <div>
+        {% if not request.user.is_authenticated %}
+            <a href="{% url 'signup' %}">Sign Up</a>
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+            Hello {{ request.user }}
+            <a href="{% url 'logout' %}">Log Out</a>
+        {% endif %}
+    </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

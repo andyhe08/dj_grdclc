@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>About / How to Use></title>
+{% endblock %}
+
+{% block content %}
+    <section id="intro">
+        <p>
+            The grade calculator at <a href="home">grdclc.com </a> is developed and maintained solely by Andy He, a
+            computer science student at Duke University in the class of 2024. This personal project aims to help me
+            develop
+            the skills of <em>HTML, CSS, JavaScript, Python, and the Django web framework,</em> as well as offering a
+            easy-to-use, simple, and efficient grade calculator within a class for high school and college students.
+            Feel
+            free to use the developer console, accessed by F12 or Ctrl+Shift+C to view the JavaScript algorithm.
+        </p>
+    </section>
+
+    <section id="method">
+        <h2>Method:</h2>
+        <div>
+            <p>
+                The calculation is performed through the following steps:
+            </p>
+            <ol>
+                <li>
+                    Within a category, sum all of your points and divide by the sum of the total points (to have all
+                    assignments be of equal value, use normalize function)
+                </li>
+                <li>
+                    Find the category's <em>contribution</em> by multiplying this average by the weight (be sure to
+                    enter
+                    the weight as a percent, not decimal)
+                </li>
+                <li>
+                    Repeat for all categories
+                </li>
+                <li>
+                    Sum the contributions for the final score
+                </li>
+            </ol>
+        </div>
+
+    </section>
+
+    <section id="feat">
+        <h2>Features:</h2>
+        <div class="button-keys"> <!--Content-->
+            <div class="entry">
+                <button class="add-category">+</button>
+                <p>Adds a category under current category with one default assignment</p>
+            </div>
+            <div class="entry">
+                <button class="delete-category">-</button>
+                <p>Deletes the current category if there is more than one category</p>
+            </div>
+            <div class="entry">
+                <button class="normalize-category">Norm all</button>
+                <p>Converts all grades within current category to be out of 100 points</p>
+            </div>
+            <div class="entry">
+                <button class="add-assignment">+</button>
+                <p>Adds a assignment under current assignment</p>
+            </div>
+            <div class="entry">
+                <button class="delete-assignment">-</button>
+                <p>Deletes current assignment</p>
+            </div>
+            <div class="entry">
+                <button class="normalize-assignment">Norm</button>
+                <p>Converts assignment's grade to be out of 100 points</p>
+            </div>
+            <div class="entry">
+                <button class="btn-1">Save to Excel</button>
+                <p>Saves sheet as an interactive excel file, with file name being the class name</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

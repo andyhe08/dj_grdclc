@@ -1,0 +1,356 @@
+html {
+    box-sizing: border-box;
+    background-color: lightgrey;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/*Global Styles*/
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+h2 {
+    margin: 20px;
+    padding: 0;
+    line-height: 0.5;
+}
+
+h3 {
+    text-shadow: 1px 1px lightcoral;
+    margin: 20px;
+    line-height: 1;
+    padding: 0;
+}
+
+button {
+    font-family: 'Farro', sans-serif;
+}
+
+a:link, a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+/*Header*/
+
+nav {
+    display: flex;
+    max-width: 800px;
+    width: 85%;
+    padding: 0;
+    margin: 5px auto;
+    align-items: center;
+
+}
+
+nav h1 {
+    font-size: 48px;
+    margin: 9.73px;
+}
+
+nav a.item {
+    padding: 5px;
+
+    margin-left: 3px;
+    margin-right: 3px;
+
+    border-style: solid;
+    border-color: gray;
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+nav div {
+    margin-left: auto;
+
+    padding: 5px;
+    border-style: solid;
+    border-color: gray;
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+nav div a {
+    margin: 5px;
+}
+
+nav div a:hover, nav a.item:hover {
+    text-decoration: underline;
+}
+
+#courseHeader {
+    display: flex;
+    max-width: 600px;
+    width: 60%;
+    padding: 0;
+    margin: 3px auto;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#courseHeader h4 {
+    margin: 5px 10px;
+}
+
+#courseName {
+    font-family: inherit;
+    padding: 5px;
+    border-radius: 10px;
+    width: 50%;
+}
+
+/*Category Styles*/
+section {
+    max-width: 800px;
+    width: 85%;
+
+    padding: 5px;
+    margin: 10px auto;
+
+    border-style: solid;
+    border-color: gray;
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+section input {
+    font-family: inherit;
+    font-size: larger;
+    padding: 8px 5px;
+    border-radius: 10px;
+}
+
+.cat-title {
+    display: flex;
+    margin: 0 0 10px 0;
+}
+
+.cat-title .name {
+    width: 58%;
+}
+
+.cat-title .weight {
+    width: 20%;
+    margin: 0 2.5%;
+}
+
+.add-category {
+    width: 5%;
+}
+
+.delete-category {
+    width: 5%;
+    margin: 0 1%
+}
+
+.normalize-category {
+    width: 5%;
+    padding: 0.5px;
+}
+
+/*Assignment Styles*/
+
+.assignments {
+    display: flex;
+    margin: 5px 0 0 0;
+}
+
+.assignments .name {
+    width: 48%;
+    margin-left: 10%;
+}
+
+.assignments .yourPoints {
+    width: 7.5%;
+    margin: 0 2.5%;
+}
+
+.assignments .totalPoints {
+    width: 7.5%;
+}
+
+.add-assignment {
+    margin-left: 5%;
+    width: 5%;
+}
+
+.assignments input {
+    padding: 4px 5px;
+}
+
+.delete-assignment {
+    width: 5%;
+    margin: 0 1%
+}
+
+.normalize-assignment {
+    width: 5%;
+    padding: 0.5px;
+}
+
+/*Buttons*/
+
+section button {
+    border: none;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+}
+
+.add-category {
+    background-color: darkcyan;
+    color: lightgray;
+}
+
+.add-category:hover {
+    background-color: rgba(1, 61, 61, 0.84);
+    color: whitesmoke;
+}
+
+.add-assignment {
+    background-color: lightcyan;
+    color: rgba(10, 10, 10, 0.72);
+}
+
+.add-assignment:hover {
+    background-color: #44f8f8;
+    color: black;
+}
+
+.delete-category {
+    background-color: #a00303;
+    color: antiquewhite;
+}
+
+.delete-category:hover {
+    background-color: #550000;
+    color: whitesmoke;
+}
+
+.delete-assignment {
+    background-color: red;
+    color: khaki;
+}
+
+.delete-assignment:hover {
+    background-color: crimson;
+    color: black;
+}
+
+.normalize-category {
+    background-color: grey;
+    color: black;
+}
+
+.normalize-category:hover {
+    background-color: black;
+    color: darkkhaki;
+}
+
+.normalize-assignment {
+    background-color: darkgray;
+    color: black;
+}
+
+.normalize-assignment:hover {
+    background-color: grey;
+    color: khaki;
+}
+
+/*Save to excel*/
+
+.btn-1 {
+    background-color: lightgreen;
+    color: black;
+    border: 2px solid lawngreen;
+    border-radius: 10px;
+    padding: 10px 20px;
+    transition-duration: 0.4s;
+    margin-bottom: 30px;
+}
+
+.btn-1:hover {
+    background-color: darkgreen;
+    border: none;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*About Section*/
+
+#intro{
+    border: none;
+}
+p {
+    text-align: left;
+    text-indent: 0.5in;
+    margin: 0;
+}
+
+em {
+    font-weight: bold;
+}
+
+#feat, #method {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+#method {
+    text-align: left;
+}
+
+#method p{
+    text-indent: 0;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+#feat div.button-keys {
+    display: flex;
+    flex-direction: column;
+}
+
+#feat div.entry {
+    height: 50px;
+    display: flex;
+    align-items: center;
+
+    margin: 10px;
+}
+
+#feat button {
+    margin: 0 10px;
+    height: 35px;
+    width: 48px;
+}
+
+#feat div button.btn-1 {
+    padding: 0;
+    width: 140px;
+}
+
+.entry {
+
+    border-style: solid;
+    border-color: whitesmoke;
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+.entry p {
+    text-align: justify;
+    text-indent: 0;
+    margin: 0 5px;
+}
