@@ -2,12 +2,27 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+from .reader import *
+
+from .models import Data
 
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+    context = {'loadin': ""}
+    if request.method == 'POST':
+        prevData = Data.objects.filter(username=request.user.id)
+        data = request.POST.get("data")
+        for q in prevData:
+            if getClassName(data) in q.course and q.course in getClassName(data):
+                q.delete()
+                print('done')
+        saveData(request, data)
+        messages.success(request, 'Save Successful')
+        context = {'loadin': data}
+
+    return render(request, 'home.html', context)
 
 
 def about(request):
@@ -59,3 +74,7 @@ def logout_user(request):
     logout(request)
     messages.success(request, 'Log out successful')
     return redirect('home')
+
+
+def my_classes(request):
+    return render(request, 'my_classes.html')

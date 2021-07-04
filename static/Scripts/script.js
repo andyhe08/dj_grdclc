@@ -1,21 +1,21 @@
 // Adding categories
 const addCategoryHTML = (e) => {
     const content = `
-    <form class="cat-title" onsubmit="return false">
+    <div class="cat-title">
         <input class="name" type="text" placeholder="Category Name">
         <input class="weight" type="number" placeholder="Weight e.g: 20" step="0.1">
-        <button class="add-category">+</button>
-        <button class="delete-category">-</button>
-        <button class="normalize-category">Norm all</button>
-    </form>
-    <form class="assignments" onsubmit="return false">
+        <button onclick="return false" class="add-category">+</button>
+        <button onclick="return false" class="delete-category">-</button>
+        <button onclick="return false" class="normalize-category">Norm all</button>
+    </div>
+    <div class="assignments">
         <input class="name" type="text" placeholder="Assignment 1">
         <input class="yourPoints" type="number" placeholder="Your Points" step="0.1">
         <input class="totalPoints" type="number" placeholder="Total Points" step="0.1">
-        <button class="add-assignment">+</button>
-        <button class="delete-assignment">-</button>
-        <button class="normalize-assignment">Norm</button>
-    </form>
+        <button onclick="return false" class="add-assignment">+</button>
+        <button onclick="return false" class="delete-assignment">-</button>
+        <button onclick="return false" class="normalize-assignment">Norm</button>
+    </div>
     `;
 
     const newCat = document.createElement("section");
@@ -34,20 +34,19 @@ const addAssignmentHTML = (e) => {
         <input class="name" type="text" placeholder="Assignment 1">
         <input class="yourPoints" type="number" placeholder="Your Points" step="0.1">
         <input class="totalPoints" type="number" placeholder="Total Points" step="0.1">
-        <button class="add-assignment">+</button>
-        <button class="delete-assignment">-</button>
-        <button class="normalize-assignment">Norm</button>
+        <button onclick="return false" class="add-assignment">+</button>
+        <button onclick="return false" class="delete-assignment">-</button>
+        <button onclick="return false" class="normalize-assignment">Norm</button>
     `
 
-    const newAssign = document.createElement("form");
+    const newAssign = document.createElement("div");
     newAssign.setAttribute("class", "assignments");
-    newAssign.setAttribute("onsubmit", "return false");
 
     newAssign.innerHTML = content;
 
-    const form = e.target.parentNode;
+    const newDiv = e.target.parentNode;
 
-    form.after(newAssign);
+    newDiv.after(newAssign);
 }
 
 const deleteCategory = (e) => {
@@ -57,14 +56,6 @@ const deleteCategory = (e) => {
     }
 }
 
-const deleteAssignment = (e) => {
-    if (e.target.parentNode.parentNode.querySelectorAll(".assignments").length > 1) {
-        let par = e.target.parentNode;
-        let ano = par.parentNode.querySelector(".add-assignment")
-        par.remove();
-        reassignDefaults(ano)
-    }
-}
 
 const normalizeCategory = (e) => {
     let cat = e.target.parentNode.parentNode;
@@ -107,12 +98,45 @@ const normalizeAssignment = (e) => {
 
 const reassignDefaults = (place) => {
     let categoryName = place.parentNode.parentNode.querySelector(".cat-title").querySelector(".name").value;
-    if (categoryName === ""){
+    if (categoryName === "") {
         categoryName = "Assignment"
     }
     let childrenArray = place.parentNode.parentNode.children
     for (let i = 1; i < childrenArray.length; i++) {
         childrenArray[i].querySelector("input").setAttribute("placeholder", categoryName + " " + i);
+    }
+}
+
+const formatToSend = () => {
+    let end = document.querySelector("#courseName").value; //START WITH CLASS NAME
+    end += "|"
+    const categories = document.querySelectorAll(".category");
+
+    for (let i = 0; i < categories.length; i++) {
+        let catName = categories[i].querySelector(".name").value;
+        let weight = categories[i].querySelector(".weight").value;
+
+        end += "Y~" + i + "~999~" + catName + "~" + weight + "~~|"
+
+        const assignments = categories[i].querySelectorAll(".assignments");
+        for (let j = 0; j < assignments.length; j++) {
+            let assnName = assignments[j].querySelector(".name").value;
+            let yS = assignments[j].querySelector(".yourPoints").value;
+            let tS = assignments[j].querySelector(".totalPoints").value;
+
+            end += "N~" + i + "~" + j + "~" + assnName + "~~" + yS + "~" + tS + "|"
+        }
+    }
+    console.log(end)
+    document.querySelector("#sendback").setAttribute("value", end);
+}
+
+const deleteAssignment = (e) => {
+    if (e.target.parentNode.parentNode.querySelectorAll(".assignments").length > 1) {
+        let par = e.target.parentNode;
+        let ano = par.parentNode.querySelector(".add-assignment")
+        par.remove();
+        reassignDefaults(ano)
     }
 }
 
@@ -130,10 +154,10 @@ const clicked = (e) => {
     if (e.target.className === "delete-assignment") {
         deleteAssignment(e);
     }
-    if (e.target.className === "normalize-category"){
+    if (e.target.className === "normalize-category") {
         normalizeCategory(e);
     }
-    if (e.target.className === "normalize-assignment"){
+    if (e.target.className === "normalize-assignment") {
         normalizeAssignment(e)
     }
 }
@@ -141,7 +165,9 @@ const clicked = (e) => {
 document.querySelector("body").addEventListener("click", clicked);
 
 document.querySelector("body").addEventListener("input", function (e) {
-    reassignDefaults(e.target);
+    if (e.target.id != "courseName") {
+        reassignDefaults(e.target);
+    }
 });
 
 const dispWarning = () => {
@@ -168,12 +194,12 @@ const clearWarning = () => {
 const calc = () => {
     let contributions = 0;
 
-    const catagories = document.querySelectorAll(".category");
+    const categories = document.querySelectorAll(".category");
 
-    for (let i = 0; i < catagories.length; i++) { //IN EACH CATEGORY
-        let weight = catagories[i].querySelector(".weight").value;
+    for (let i = 0; i < categories.length; i++) { //IN EACH CATEGORY
+        let weight = categories[i].querySelector(".weight").value;
 
-        const assignments = catagories[i].querySelectorAll(".assignments");
+        const assignments = categories[i].querySelectorAll(".assignments");
 
         let totalYourPoints = 0;
         let totalAllPoints = 0;
@@ -204,6 +230,7 @@ const calc = () => {
 }
 
 document.querySelector("body").addEventListener("mouseover", function () {
+    formatToSend();
     clearWarning();
     let content = `
     Grade: ${calc().toFixed(3)}%
@@ -329,4 +356,3 @@ document.querySelector("#excel").addEventListener("click", function () {
 
     saveAs(new Blob([s2ab(wbout)], {type: "application/octet-stream"}), className + ".xlsx");
 })
-

@@ -9,35 +9,46 @@
     <script type="module" src="{% static 'Scripts/script.js' %}"></script>
     <script src="{% static 'Scripts/xlsx.full.min.js' %}"></script>
     <script src="{% static 'Scripts/FileSaver.min.js' %}/"></script>
+    <script src="{% static 'Scripts/jquery.min.js' %}"></script>
 {% endblock %}
 
 {% block content %}
+    <input type=hidden id="loadin" value={{ loadin }}>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div id="courseHeader">
+            <h4>Course Name: </h4>
+            <input id="courseName" type="text" placeholder="Intro to Computer Science">
+        </div>
+        <section class="category">
+            <div class="cat-title">
+                <input class="name" type="text" placeholder="Category Name">
+                <input class="weight" type="number" placeholder="Weight e.g: 20" step="0.1">
+                <button onclick="return false" class="add-category">+</button>
+                <button onclick="return false" class="delete-category">-</button>
+                <button onclick="return false" class="normalize-category">Norm all</button>
+            </div>
+            <div class="assignments">
+                <input class="name" type="text" placeholder="Assignment 1">
+                <input class="yourPoints" type="number" placeholder="Your Points" step="0.1">
+                <input class="totalPoints" type="number" placeholder="Total Points" step="0.1">
+                <button onclick="return false" class="add-assignment">+</button>
+                <button onclick="return false" class="delete-assignment">-</button>
+                <button onclick="return false" class="normalize-assignment">Norm</button>
+            </div>
+        </section>
 
-    <div id="courseHeader">
-        <h4>Course Name: </h4>
-        <input id="courseName" type="text" placeholder="Intro to Computer Science">
-    </div>
-    <section class="category">
-        <form class="cat-title" onsubmit="return false">
-            <input class="name" type="text" placeholder="Category Name">
-            <input class="weight" type="number" placeholder="Weight e.g: 20" step="0.1">
-            <button class="add-category">+</button>
-            <button class="delete-category">-</button>
-            <button class="normalize-category">Norm all</button>
-        </form>
-        <form class="assignments" onsubmit="return false">
-            <input class="name" type="text" placeholder="Assignment 1">
-            <input class="yourPoints" type="number" placeholder="Your Points" step="0.1">
-            <input class="totalPoints" type="number" placeholder="Total Points" step="0.1">
-            <button class="add-assignment">+</button>
-            <button class="delete-assignment">-</button>
-            <button class="normalize-assignment">Norm</button>
-        </form>
-    </section>
-    <footer>
-        <h2>Grade: </h2>
-    </footer>
+        <footer>
+            <h2>Grade: </h2>
+        </footer>
 
-    <button id="excel" class="btn-1">Save to Excel</button>
+        <button onclick="return false" id="excel" class="btn-1">Save to Excel</button>
+        {% if request.user.is_authenticated %}
+            <input type="hidden" name="data" id="sendback" value="qwee">
+            <button id="database" class="btn-1 save">Save to Profile</button>
+            <script src="{% static 'Scripts/loadin.js' %}"></script>
+        {% endif %}
+    </form>
+
 
 {% endblock %}
