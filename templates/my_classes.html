@@ -2,8 +2,21 @@
 {% load static %}
 {% block title %}
     <title>My Classes</title>
+
 {% endblock %}
 
 {% block content %}
-    hello
+    <form method="POST" action="">
+        {% csrf_token %}
+        {% for c in classes %}
+            <section class="desc">
+                <button id="{{ c.course }}">
+                    {{ c.course }}
+                </button>
+            </section>
+        {% endfor %}
+
+        <input type="hidden" name="whereto" id="whereto">
+    </form>
+    <script src="{% static 'Scripts/myClasses.js' %}"></script>
 {% endblock %}

@@ -4,23 +4,27 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from .reader import *
 
-from .models import Data
+from .models import Data, DataReqst
 
 
 # Create your views here.
 
 def home(request):
     context = {'loadin': ""}
+
     if request.method == 'POST':
         prevData = Data.objects.filter(username=request.user.id)
         data = request.POST.get("data")
         for q in prevData:
             if getClassName(data) in q.course and q.course in getClassName(data):
                 q.delete()
-                print('done')
         saveData(request, data)
         messages.success(request, 'Save Successful')
         context = {'loadin': data}
+
+    if len(DataReqst.objects.all()) == 1:
+        context = {'loadin': DataReqst.objects.all()[0].enc}
+        DataReqst.objects.all().delete()
 
     return render(request, 'home.html', context)
 
@@ -77,4 +81,21 @@ def logout_user(request):
 
 
 def my_classes(request):
-    return render(request, 'my_classes.html')
+    if request.method == "POST":
+        target = request.POST.get("whereto")
+        Datas = Data.objects.filter(username=request.user.id, course=target)
+        DataReqst.objects.all().delete()
+        nDRQ = DataReqst()
+        nDRQ.enc = formLoadin(Datas)
+        nDRQ.save()
+        return redirect('home')
+    classes = Data.objects.filter(username=request.user.id)
+    uC = []
+    classNames = []
+    for c in classes:
+        for cl in uC:
+            classNames.append(cl.course)
+        if c.course not in classNames:
+            uC.append(c)
+    context = {'classes': uC}
+    return render(request, 'my_classes.html', context)

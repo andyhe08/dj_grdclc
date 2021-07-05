@@ -25,3 +25,19 @@ def saveData(request, data):
         tD.yourScore = sR[5]
         tD.totalScore = sR[6]
         tD.save()
+
+
+def formLoadin(Datas):
+    ret = ""
+    ret += Datas[0].course + "|"
+
+    for d in Datas:
+        ret += d.isCategory + "~"
+        ret += str(d.catNum) + "~"
+        ret += str(d.assignNum) + "~"
+        ret += d.name + "~"
+        ret += d.weight + "~"
+        ret += d.yourScore + "~"
+        ret += d.totalScore + "|"
+
+    return ret

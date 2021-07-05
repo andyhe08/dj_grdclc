@@ -17,3 +17,7 @@ class Data(models.Model):
     weight = models.CharField(max_length=5, null=True)
     yourScore = models.CharField(max_length=5, null=True)
     totalScore = models.CharField(max_length=5, null=True)
+
+
+class DataReqst(models.Model):
+    enc = models.TextField()

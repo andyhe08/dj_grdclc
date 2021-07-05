@@ -107,6 +107,22 @@ const reassignDefaults = (place) => {
     }
 }
 
+const passiveDefAssign = () => {
+    let categories = document.querySelectorAll(".category")
+    for (let i = 0; i < categories.length; i++) {
+        let curCat = categories[i]
+        let catName = curCat.querySelector(".cat-title .name").value
+        if (catName === "") {
+            catName = "Assignment"
+        }
+        let childs = curCat.children
+        for (let i = 1; i < childs.length; i++) {
+            childs[i].querySelector("input").setAttribute("placeholder", catName + " " + i);
+        }
+    }
+
+}
+
 const formatToSend = () => {
     let end = document.querySelector("#courseName").value; //START WITH CLASS NAME
     end += "|"
@@ -127,7 +143,6 @@ const formatToSend = () => {
             end += "N~" + i + "~" + j + "~" + assnName + "~~" + yS + "~" + tS + "|"
         }
     }
-    console.log(end)
     document.querySelector("#sendback").setAttribute("value", end);
 }
 
@@ -230,6 +245,7 @@ const calc = () => {
 }
 
 document.querySelector("body").addEventListener("mouseover", function () {
+    passiveDefAssign()
     formatToSend();
     clearWarning();
     let content = `
