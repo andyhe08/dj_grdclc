@@ -33,6 +33,10 @@ def about(request):
     return render(request, 'about.html')
 
 
+def specifics(request):
+    return render(request, 'specifics.html')
+
+
 def login_page(request):
     form = AuthenticationForm()
     if request.method == "POST":
@@ -83,12 +87,16 @@ def logout_user(request):
 def my_classes(request):
     if request.method == "POST":
         target = request.POST.get("whereto")
-        Datas = Data.objects.filter(username=request.user.id, course=target)
-        DataReqst.objects.all().delete()
-        nDRQ = DataReqst()
-        nDRQ.enc = formLoadin(Datas)
-        nDRQ.save()
-        return redirect('home')
+        if "|~|~|delete|~|~|" in target:
+            Data.objects.filter(username=request.user.id, course=target.split("|~|~|delete|~|~|")[1]).delete()
+            messages.error(request, 'Delete Successful')
+        else:
+            Datas = Data.objects.filter(username=request.user.id, course=target)
+            DataReqst.objects.all().delete()
+            nDRQ = DataReqst()
+            nDRQ.enc = formLoadin(Datas)
+            nDRQ.save()
+            return redirect('home')
     classes = Data.objects.filter(username=request.user.id)
     uC = []
     classNames = []
@@ -97,5 +105,6 @@ def my_classes(request):
             classNames.append(cl.course)
         if c.course not in classNames:
             uC.append(c)
+    uC.reverse()
     context = {'classes': uC}
     return render(request, 'my_classes.html', context)

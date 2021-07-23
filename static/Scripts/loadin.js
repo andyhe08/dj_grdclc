@@ -52,8 +52,7 @@ document.querySelector(".assignments .totalPoints").value = curRowSplit[6]
 
 rowSplit.shift() // Deletes the first two elements
 rowSplit.shift()
-console.log("ran")
-console.log(rowSplit)
+
 for (let i = 0; i < rowSplit.length; i++) {
     let curRow = rowSplit[i]
     curRowSplit = curRow.split("~")

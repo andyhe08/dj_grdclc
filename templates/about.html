@@ -7,13 +7,18 @@
 {% block content %}
     <section id="intro">
         <p>
-            The grade calculator at <a href="home">grdclc.com </a> is developed and maintained solely by Andy He, a
+            The grade calculator at <a class="int-link" href="{% url 'home' %}">grdclc.com </a> is developed and maintained solely by Andy He, a
             computer science student at Duke University in the class of 2024. This personal project aims to help me
-            develop
-            the skills of <em>HTML, CSS, JavaScript, Python, and the Django web framework,</em> as well as offering a
-            easy-to-use, simple, and efficient grade calculator within a class for high school and college students.
-            Feel
-            free to use the developer console, accessed by F12 or Ctrl+Shift+C to view the JavaScript algorithm.
+            develop the skills of <em>HTML, CSS, JavaScript, Python, Django web framework, SQL databases, and deployment
+            to Heroku</em> as well as
+            offering a easy-to-use, simple, and efficient grade calculator within a class for high school and college
+            students. Feel free to use the developer console, accessed by F12 or Ctrl+Shift+C to view the JavaScript
+            algorithm.
+        </p>
+        <p>
+            Signing in with a profile allows students to store all of their classes in one place, as a robust database
+            storage system ensures data security. To learn more about the specifics about the application, and specifics
+            of data storage,<em><a class="int-link" href="{% url 'specifics' %}"> click here</a></em>.
         </p>
     </section>
 
@@ -41,11 +46,10 @@
                 </li>
             </ol>
         </div>
-
     </section>
 
     <section id="feat">
-        <h2>Features:</h2>
+        <h2>Buttons:</h2>
         <div class="button-keys"> <!--Content-->
             <div class="entry">
                 <button class="add-category">+</button>
@@ -75,6 +79,11 @@
                 <button class="btn-1">Save to Excel</button>
                 <p>Saves sheet as an interactive excel file, with file name being the class name</p>
             </div>
+            <div class="entry">
+                <button class="btn-1">Save to Profile</button>
+                <p>Saves sheet to user profile using database management feature (must be logged in)</p>
+            </div>
         </div>
     </section>
+
 {% endblock %}

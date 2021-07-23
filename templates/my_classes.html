@@ -10,8 +10,11 @@
         {% csrf_token %}
         {% for c in classes %}
             <section class="desc">
-                <button id="{{ c.course }}">
+                <button class="cn" id="{{ c.course }}">
                     {{ c.course }}
+                </button>
+                <button class="delete" id="|~|~|delete|~|~|{{ c.course }}">
+                    delete
                 </button>
             </section>
         {% endfor %}

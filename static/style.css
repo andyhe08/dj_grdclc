@@ -299,6 +299,7 @@ section button {
 #intro{
     border: none;
 }
+
 p {
     text-align: left;
     text-indent: 0.5in;
@@ -360,4 +361,8 @@ em {
     text-align: justify;
     text-indent: 0;
     margin: 0 5px;
+}
+
+.ita {
+    font-style: italic;
 }

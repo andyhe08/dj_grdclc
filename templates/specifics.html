@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Storage Specifics</title>
+{% endblock %}
+
+{% block content %}
+    <section id="method">
+        <h2>Method:</h2>
+        <div>
+            <ol>
+                <li>
+                    As the user is inputting grade data, a hidden input field is continuously updating its value to be
+                    passed into the backend. This field uses string compression and a <span class="ita">custom delimiter scheme</span>
+                    to send
+                    all class data in one string for simplicity. Clicking the <em>Save to Profile</em> button sends a
+                    POST request and thus data is sent to the database.
+                </li>
+                <li>
+                    Each row in the database represents one row on the main grade calculator GUI. With columns of
+                    <span class="ita">username, course, isCategory, catNum, assignNum, name, weight, yourScore, and totalScore</span>,
+                    each entry
+                    is differentiated by the isCategory column. The order of which classes were entered on the main GUI
+                    is
+                    detailed by catNum and assignNum. With this data being stored, users will be able to request a
+                    class to be loaded and all of the information stored in the class will be able to be retrieved.
+                    Saving a class deletes all the old entries and replaces them with new ones.
+                </li>
+                <li>
+                    Classes for each user can be accessed by clicking the <em>My Classes</em> button in the navigation
+                    bar (only appears when signed in). Classes appear in the My Classes view by querying the database by
+                    username and unique course names.
+                </li>
+                <li>
+                    Clicking on a course will retrieve all the data and set a hidden input field that saves to another
+                    table in the database to be sent to the main page. This is done because data cannot be sent from one
+                    view to another seamlessly without backend transfer. This new table is named DataReqst and only ever
+                    contains one row: as soon as the home page is reloaded, the table is wiped. This table contains one
+                    piece of information, and it is again the compressed string with custom delimiters.
+                </li>
+                <li>
+                    When navigating back to the home page, if there is data in the DataReqst table, then loadin.js runs
+                    and parses the compressed string to autofill the GUI with the previous data. This method effectively
+                    saves and displays user-saved class data, which is the goal of the project.
+                </li>
+            </ol>
+        </div>
+    </section>
+{% endblock %}
